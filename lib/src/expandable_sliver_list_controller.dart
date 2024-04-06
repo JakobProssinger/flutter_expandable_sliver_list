@@ -87,6 +87,13 @@ class ExpandableSliverListController<T>
     }
   }
 
+  /// Sets the duration for the list to expand/collapse
+  /// This will also recalculate the item period
+  void setDuration(Duration duration) {
+    _duration = duration;
+    _calcItemPeriod();
+  }
+
   /// Sets the items in this collection.
   ///
   /// Useful for when the this controller's items are supposed to be mirroring
@@ -113,7 +120,8 @@ class ExpandableSliverListController<T>
           for (int i = 0; i < numItemsToAdd; i++) {
             // index doesn't matter, as we just want the state's internal list
             // count to change
-            listKey.currentState?.insertItem(0, duration: const Duration(seconds: 0));
+            listKey.currentState
+                ?.insertItem(0, duration: const Duration(seconds: 0));
           }
         }
 
